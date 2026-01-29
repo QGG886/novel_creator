@@ -5,9 +5,8 @@
 ## 快速开始
 
 1. 阅读 **AGENTS.md** 了解系统架构和工作流程
-2. 根据需要修改 **config.md** 配置项目参数
-3. 查看 **templates.md** 使用各类创作模板
-4. 参考 **COMMON.md** 了解通用规范
+2. 查看 **templates.md** 使用各类创作模板
+3. 参考 **COMMON.md** 了解通用规范
 
 ## 核心功能
 
@@ -30,6 +29,7 @@
 ### 项目管理
 - ✅ 版本管理 - 完整的版本控制系统
 - ✅ 进度追踪 - 实时记录章节和字数进度
+- ✅ 字数统计 - 基于实际文件的准确字数统计
 - ✅ 多格式导出 - 支持 Markdown、PDF、EPUB、DOCX 等
 - ✅ 反馈处理 - 灵活处理修改请求
 
@@ -40,7 +40,6 @@
 ├── README.md                   # 项目说明
 ├── AGENTS.md                  # 系统架构和工作流程
 ├── COMMON.md                  # 通用规范和标准
-├── config.md                  # 项目配置文件
 ├── templates.md               # 创作模板系统
 ├── .opencode/                 # OpenCode标准目录
 │   ├── agents/                # Agent定义（11个）
@@ -55,11 +54,15 @@
 │   │   ├── editor_agent.md
 │   │   ├── research_agent.md
 │   │   └── feedback_agent.md
-│   └── skills/                # Skill工具定义（15个）
+│   └── skills/                # Skill工具定义（19个）
 │       ├── character_gen/SKILL.md
 │       ├── style_format/SKILL.md
 │       ├── chapter_write/SKILL.md
+│       ├── skeleton_outline/SKILL.md
 │       ├── interactive_guide/SKILL.md
+│       ├── chapter_context_analysis/SKILL.md
+│       ├── foreshadowing_analysis/SKILL.md
+│       ├── character_voice_analysis/SKILL.md
 │       ├── plot_hole_detection/SKILL.md
 │       ├── world_consistency/SKILL.md
 │       ├── dialogue_naturalization/SKILL.md
@@ -70,6 +73,7 @@
 │       ├── version_control/SKILL.md
 │       ├── export_formatter/SKILL.md
 │       ├── progress_tracking/SKILL.md
+│       ├── word_count/SKILL.md
 │       └── outline_refine/SKILL.md
 ├── outline/                    # 大纲文件（使用时创建）
 ├── characters/                 # 角色文件（使用时创建）
@@ -138,6 +142,7 @@
 | version_control | 版本管理 | 管理工具 |
 | export_formatter | 多格式导出 | 管理工具 |
 | progress_tracking | 进度追踪 | 管理工具 |
+| word_count | 字数统计 | 管理工具 |
 
 ## 常见问题
 
@@ -154,7 +159,7 @@ A: 可以，世界观构建Agent支持多个维度的详细设定。
 A: 可以，在任何阶段都可以提出修改，Agent会相应调整并保持一致性。
 
 **Q: 每章字数是多少？**
-A: 可以在config.md中配置，默认建议2000-5000字/章。
+A: 建议每章2000-5000字，可根据需要调整。
 
 **Q: 支持多卷小说吗？**
 A: 完全支持，大纲系统专门为多卷小说设计。
@@ -180,7 +185,7 @@ A: 支持Markdown、文本、HTML、PDF、EPUB、DOCX等多种格式。
 这是一个基于提示词的系统，不是代码项目。所有Agent和Skill都通过自然语言指令工作。
 
 - **11个核心Agent** - 负责创造性任务
-- **14个Skill工具** - 负责功能性任务
+- **19个Skill工具** - 负责功能性任务
 - **通用规范** - 统一的输入输出和质量标准
 
 ## 开始创作
