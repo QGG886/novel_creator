@@ -1,14 +1,18 @@
-# 小说写作助手(优化版)
+# 小说写作助手(重构版v2.0)
 
 ## 项目定位
 这是一个基于多Agent协作的智能小说写作助手，通过明确的职责分工和工具化Skill，帮助用户从大纲设计到逐章创作完成一部小说。
+
+**v2.0重构亮点**：
+- ✅ **架构精简**：从11个Agent+19个Skill精简到8个Agent+10个Skill
+- ✅ **防跑题机制**：强制约束框架+实时自检，确保章节内容不超大纲范围
+- ✅ **自动化报告**：7个分析报告转为后台自动检查，只输出摘要
+- ✅ **聚焦核心**：只展示需要用户关注的关键问题
 
 ## 项目结构
 - **Agent定义**：`.opencode/agents/` - 各Agent的详细定义文件
 - **Skill定义**：`.opencode/skills/` - 各Skill的详细定义文件
 - **主架构文档**：本文档(`AGENTS.md`)
-- **通用规范**：`COMMON.md`
-- **模板系统**：`templates.md`
 
 ## 核心理念
 
@@ -18,7 +22,7 @@
 
 ## Agent列表(创造性工作)
 
-### 核心创作Agent
+### 核心创作Agent(6个)
 1. **outline_agent**：大纲设计
    - 理解用户想法，设计故事结构
    - 交互式引导，补充信息
@@ -39,77 +43,95 @@
    - 生成文风指南
    - 提取典型示例
 
-5. **chapter_agent**：章节编写
-   - 创作章节内容
-   - 融合多重信息
-   - 确保连贯性
+5. **golden_three_chapters_agent**：黄金三章创作
+   - 一口气生成前三章
+   - 确保三章高度连贯
+   - 快速建立吸引人的开篇
+   - 拆分输出落地
+   - 为后续章节铺平道路
 
-6. **dialogue_agent**：对话优化
-   - 创作和优化对话
-   - 设计角色声音
-   - 提升对话自然度
+6. **continuation_agent**：续写创作（重构：从chapter_agent拆分）
+   - 创作第4章及以后的章节内容
+   - 严格遵循骨架文和约束清单
+   - 与前后章节保持高度连贯
+   - **防跑题机制**：实时自检每500字，防止偏离大纲范围
+   - 处理长期伏笔的埋设和回收
 
-### 质量控制Agent
-7. **plot_review_agent**：情节审查
-   - 全面审查情节
-   - 识别逻辑问题
-   - 提供优化方案
+### 质量控制Agent(1个)
+6. **quality_agent**：质量控制（重构：合并plot_review_agent、continuity_agent、editor_agent）
+   - 自动化运行质量检查工具
+    - 识别关键问题（情节漏洞、世界观矛盾）
+    - 提供简要修复建议
+    - 章节质量问题的修复（创作后发现问题）
 
-8. **continuity_agent**：连贯性检查
-   - 检查设定一致
-   - 验证角色一致
-   - 检查时间线
-
-### 编辑Agent
-9. **editor_agent**：编辑润色
-   - 语言优化
-   - 文学润色
-   - 结构优化
-
-### 辅助Agent
-10. **research_agent**：资料研究
-    - 收集背景资料
-    - 验证设定准确
-    - 整理资料库
-
-11. **feedback_agent**：反馈处理
-    - 理解用户反馈
-    - 协调修改
-    - 追踪进度
+### 辅助Agent(1个)
+7. **feedback_agent**：反馈处理
+   - 理解用户反馈
+   - 协调修改
+   - 追踪进度
 
 ## Skill列表(辅助工具)
 
-### 格式化工具
-1. **character_gen**：角色卡格式化
-2. **style_format**：文风格式化
-3. **chapter_write**：章节模板应用
-4. **skeleton_outline**：骨架文生成
-
-### 引导工具
-5. **interactive_guide**：交互式引导
+### 引导工具(1个)
+1. **interactive_guide**：交互式引导
    - 生成引导性问题
    - 收集用户偏好
    - 辅助决策
 
-### 分析工具
-6. **chapter_context_analysis**：章节上下文分析
-7. **foreshadowing_analysis**：伏笔分析
-8. **character_voice_analysis**：角色语音分析
-9. **plot_hole_detection**：情节漏洞检测
-10. **world_consistency**：世界观一致性检查
-11. **dialogue_naturalization**：对话自然度检查
-12. **pacing_analysis**：节奏分析
-13. **emotional_arc**：情感曲线分析
-14. **theme_analysis**：主题分析
-15. **character_arc_tracking**：角色弧光追踪
+### 格式化工具(3个)
+2. **character_gen**：角色卡格式化
+3. **style_format**：文风格式化
+4. **chapter_write**：章节模板应用
 
-### 管理工具
-16. **version_control**：版本管理
-17. **export_formatter**：多格式导出
-18. **progress_tracking**：进度追踪
-19. **word_count**：字数统计
+### 章节创作工具(3个)
+5. **chapter_prep**：章节准备（重构：合并chapter_context_analysis、foreshadowing_analysis、character_voice_analysis）
+   - 分析前两章剧情（从第3章开始）
+   - 分析伏笔安排
+   - 分析角色语音
+   - 一次性输出创作所需的所有上下文信息
 
+6. **chapter_outline**：章节骨架（重构：skeleton_outline强化版）
+   - 生成章节骨架文
+   - **生成强制约束清单**（关键新功能）
+     - 禁止写的内容
+     - 必须达成的事件
+     - 时间/地点/角色状态限制
+     - 字数范围限制
 
+7. **auto_check**：自动检查（重构：合并dialogue_naturalization、pacing_analysis、emotional_arc、theme_analysis）
+   - 后台自动运行
+   - 检查：对话自然度、节奏、情感、主题
+   - 只输出：通过/不通过 + 简要问题列表
+
+### 关键检查工具(2个)
+8. **plot_hole_detection**：情节漏洞检测
+   - 识别逻辑漏洞
+   - 发现前后矛盾
+   - 输出简要问题列表
+
+9. **world_consistency**：世界观一致性检查
+   - 检查设定一致
+   - 验证规则遵循
+   - 输出简要问题列表
+
+### 管理工具(1个)
+10. **version_control**：版本管理
+    - 创建版本
+    - 比较版本
+    - 回滚版本
+
+## 架构对比
+
+### v1.0 vs v2.0
+
+| 项目 | v1.0 | v2.0 | 优化 |
+|------|------|------|------|
+| Agent数量 | 11个 | 8个 | -27% |
+| Skill数量 | 19个 | 10个 | -47% |
+| 每章预分析调用 | 4个Skill | 2个Skill | -50% |
+| 每章质量检查 | 7个报告 | 3个摘要 | -57% |
+| 跑题控制 | 无强制约束 | 骨架文+约束清单+实时自检 | ✅ |
+| 用户阅读量 | 7个详细报告 | 1个质量摘要 | -86% |
 
 ## Agent与Skill交互关系
 
@@ -128,7 +150,7 @@ interactive_guide (生成引导问题)
   ↓ 使用
 plot_hole_detection (检查漏洞)
   ↓ 使用
-pacing_analysis (分析节奏)
+auto_check (检查节奏，仅分析维度)
 ```
 
 #### 2. 角色创建阶段
@@ -138,15 +160,11 @@ character_agent (主)
 interactive_guide (生成引导问题)
   ↓ 使用
 character_gen (格式化角色卡)
-  ↓ 使用
-character_arc_tracking (追踪弧光)
 ```
 
 #### 3. 世界观构建阶段
 ```
 world_building_agent (主)
-  ↓ 使用
-research_agent (收集资料)
   ↓ 使用
 world_consistency (检查一致性)
 ```
@@ -160,141 +178,86 @@ interactive_guide (收集用户偏好)
 style_format (格式化文风指南)
 ```
 
-#### 5. 章节创作阶段
-```
-# 前两章（简化）
-预创作分析：
-  ↓ 使用
-character_voice_analysis (分析角色语音)
+#### 5. 章节创作阶段（v2.0核心流程）
 
+**5.1 黄金三章创作**
+```
 创作阶段：
   ↓ 使用
-chapter_agent (主)
-  ↓ 使用
-chapter_write (应用模板)
-  ↓ 使用
-dialogue_agent (优化对话)
+golden_three_chapters_agent (主)
+  ├─ 一口气生成前三章
+  ├─ 确保三章高度连贯
+  ├─ 快速建立吸引人的开篇
+  └─ 拆分输出落地
 
 质量检查：
   ↓ 使用
-dialogue_naturalization (检查对话自然度)
+auto_check (自动运行，后台)
   ↓ 使用
-plot_hole_detection (检测漏洞)
+plot_hole_detection (检查情节连贯性)
   ↓ 使用
-world_consistency (检查设定)
-  ↓ 使用
-continuity_agent (检查连贯性)
-  ↓ 使用
-pacing_analysis (分析节奏)
-  ↓ 使用
-theme_analysis (分析主题)
-  ↓ 使用
-emotional_arc (分析情感)
-
-编辑润色：
-  ↓ 使用
-editor_agent (主)
-  ↓ 使用
-dialogue_naturalization (优化对话)
-  ↓ 使用
-plot_hole_detection (检查问题)
-
-# 从第3章开始（完整）
-预创作分析：
-  ↓ 使用
-chapter_context_analysis (分析上下文)
-  ↓ 使用
-foreshadowing_analysis (分析伏笔)
-  ↓ 使用
-character_voice_analysis (分析角色语音)
-  ↓ 使用
-skeleton_outline (生成骨架文)
-
-创作阶段：
-  ↓ 使用
-chapter_agent (主)
-  ↓ 使用
-chapter_write (基于骨架文创作)
-  ↓ 使用
-dialogue_agent (优化对话)
-
-质量检查：
-  ↓ 使用
-dialogue_naturalization (检查对话自然度)
-  ↓ 使用
-plot_hole_detection (检测漏洞)
-  ↓ 使用
-world_consistency (检查设定)
-  ↓ 使用
-continuity_agent (检查连贯性)
-  ↓ 使用
-pacing_analysis (分析节奏)
-  ↓ 使用
-theme_analysis (分析主题)
-  ↓ 使用
-emotional_arc (分析情感)
-
-编辑润色：
-  ↓ 使用
-editor_agent (主)
-  ↓ 使用
-dialogue_naturalization (优化对话)
-  ↓ 使用
-plot_hole_detection (检查问题)
-
-章节后续处理：
-  ↓ 使用
-version_control (保存版本)
-  ↓ 使用
-word_count (统计字数)
-  ↓ 使用
-progress_tracking (更新进度)
+world_consistency (检查世界观一致性)
 ```
 
-#### 6. 全面审查阶段
+**5.2 续写创作（第4章及以后）**
 ```
-plot_review_agent (主)
-continuity_agent (主)
+阶段零：章节准备
   ↓ 使用
-plot_hole_detection
+chapter_prep (一次性生成所有上下文)
+  ├─ 输入：章节信息、本卷大纲、前后章节大纲、已写章节、角色卡
+  └─ 输出：上下文分析、伏笔安排、角色语音指导
+
+阶段一：生成骨架
   ↓ 使用
-world_consistency
+chapter_outline (生成骨架文+强制约束清单)
+  ├─ 输入：章节信息、chapter_prep输出、角色卡、世界观
+  └─ 输出：
+      ├─ 骨架文（开场、发展、高潮、结尾）
+      └─ 约束清单（禁止写的内容、必须达成的事件、限制条件）
+
+阶段二：章节创作
   ↓ 使用
-theme_analysis
+continuation_agent (主)
+  ├─ 严格遵循骨架文结构
+  ├─ 严格遵守约束清单
+  ├─ 实时自检：每500字检查一次
+  │   ├─ 是否偏离骨架文？
+  │   ├─ 是否超出约束清单？
+  │   └─ 是否在本章大纲范围内？
+  └─ 如发现偏离，立即纠正
+
+阶段三：自动质量检查
   ↓ 使用
-emotional_arc
+auto_check (后台自动运行)
+  ├─ 检查：对话自然度、节奏、情感、主题
+  └─ 输出：通过/不通过 + 简要问题列表
+
+阶段四：关键问题检查
   ↓ 使用
-pacing_analysis
-  ↓ 使用
-character_arc_tracking
+quality_agent (调用)
+  ├─ plot_hole_detection (情节漏洞)
+  └─ world_consistency (世界观一致性)
+
+阶段五：输出最终结果
+  输出给用户：
+  ├─ 章节正文
+  ├─ 创作说明
+  └─ 质量摘要（通过/不通过 + 简要问题）
 ```
 
-#### 7. 编辑润色阶段
-```
-editor_agent (主)
-  ↓ 使用
-dialogue_naturalization
-  ↓ 使用
-plot_hole_detection
-```
-
-#### 8. 导出和交付阶段
+#### 6. 导出和交付阶段
 ```
 feedback_agent (协调)
   ↓ 使用
 version_control
   ↓ 使用
-export_formatter
-  ↓ 使用
-progress_tracking
+progress_tracking (内部工具，不作为独立Skill)
 ```
 
 ## 完整工作流程
 
 ### 阶段零：项目初始化
-1. 加载模板 `templates.md`
-2. 读取通用规范 `COMMON.md`
-3. 确认项目基本信息
+1. 确认项目基本信息
 
 ### 阶段一：需求分析
 1. 调用 `interactive_guide` 生成引导问题
@@ -306,7 +269,6 @@ progress_tracking
 1. 调用 `outline_agent` 设计大纲
    - 使用 `interactive_guide` 补充信息
    - 使用 `plot_hole_detection` 检查漏洞
-   - 使用 `pacing_analysis` 分析节奏
 2. 保存大纲到 `outline/` 文件夹
 3. 调用 `version_control` 创建版本
 
@@ -315,15 +277,13 @@ progress_tracking
 2. 调用 `character_agent` 创建角色
    - 使用 `interactive_guide` 了解偏好
    - 使用 `character_gen` 格式化角色卡
-   - 使用 `character_arc_tracking` 追踪弧光
 3. 保存角色卡到 `characters/` 文件夹
 
 ### 阶段四：世界观构建(可选)
 1. 识别世界观需求
-2. 调用 `research_agent` 收集资料
-3. 调用 `world_building_agent` 构建设定
-4. 调用 `world_consistency` 验证一致性
-5. 保存设定到 `world_building/` 文件夹
+2. 调用 `world_building_agent` 构建设定
+3. 调用 `world_consistency` 验证一致性
+4. 保存设定到 `world_building/` 文件夹
 
 ### 阶段五：文风确定
 1. 检查是否有范文
@@ -336,130 +296,110 @@ progress_tracking
 
 ### 阶段六：预创作检查
 1. 调用 `plot_hole_detection` 检查大纲
-2. 调用 `pacing_analysis` 分析节奏
-3. 调用 `theme_analysis` 识别主题
-4. 生成预创作报告
+2. 生成预创作报告
 
 ### 阶段七：逐章创作与质量检查
-对每章执行：
 
-#### 1. 前两章（简化流程）
+#### 7.1 黄金三章创作
 
-**1.1 预创作分析**：
-- 使用 `character_voice_analysis` 分析角色语音
-  - 输入：角色卡、文风指南
-  - 输出：角色声音特征报告
+**7.1.1 创作阶段**
+- 调用 `golden_three_chapters_agent` 创作前三章
+  - 一口气生成前三章的完整内容
+  - 确保三章之间的高度连贯性
+  - 快速建立吸引人的开篇
+  - 拆分输出为独立章节文件
 
-**1.2 创作阶段**：
-- 调用 `chapter_agent` 创作章节
-  - 使用 `chapter_write` 应用模板
-  - 使用 `dialogue_agent` 优化对话
+**7.1.2 质量检查**
+- 使用 `auto_check` 自动检查（后台运行）
+  - 检查：对话自然度、节奏、情感、主题
+  - 输出：通过/不通过 + 简要问题列表
+- 使用 `plot_hole_detection` 检查情节连贯性
+- 使用 `world_consistency` 检查世界观一致性
+- 如不通过，交由 `quality_agent` 修复
 
-**1.3 章节质量检查**：
-- 使用 `dialogue_naturalization` 检查对话自然度
-- 使用 `plot_hole_detection` 检测漏洞
-- 使用 `world_consistency` 检查设定
-- 使用 `continuity_agent` 检查连贯性（局部：本章与前后章节）
-- 使用 `pacing_analysis` 分析节奏（局部：本章节奏）
-- 使用 `theme_analysis` 分析主题（局部：本章主题）
-- 使用 `emotional_arc` 分析情感（局部：本章情感）
+**7.1.3 章节输出**
+- 呈现给用户确认
+- 保存到 `output/chapters/`
+- 输出质量摘要
 
-**1.4 章节编辑润色**：
-- 使用 `editor_agent` 编辑润色
-  - 使用 `dialogue_naturalization` 优化对话（基于检查结果）
-  - 使用 `plot_hole_detection` 检查问题（基于检查结果）
+#### 7.2 续写创作（第4章及以后）
 
-#### 2. 从第3章开始（完整流程）
+**7.2.1 阶段零：章节准备**
+- 使用 `chapter_prep` 一次性生成所有上下文
+  - 输入：章节信息、本卷大纲、前后章节大纲、已写章节、角色卡
+  - 输出：
+    - 上下文分析（时间线、地点、角色状态）
+    - 伏笔安排（需要埋设的、需要回收的）
+    - 角色语音指导（每个角色的说话特点）
 
-**2.1 预创作分析**（为创作做准备）：
-- 使用 `chapter_context_analysis` 分析上下文
-  - 输入：本卷大纲、前后各两章内容、角色卡、世界观
-  - 输出：上下文分析报告（关键信息、需要承接的内容、伏笔回收点）
-- 使用 `foreshadowing_analysis` 分析伏笔
-  - 输入：本卷大纲、已完成的伏笔记录
-  - 输出：伏笔分析报告（需要埋设的新伏笔、需要回收的旧伏笔）
-- 使用 `character_voice_analysis` 分析角色语音
-  - 输入：角色卡、文风指南、本章出场角色
-  - 输出：角色声音特征报告
-- 使用 `skeleton_outline` 生成骨架文
-  - 输入：本章大纲、上下文分析、伏笔分析、角色语音分析
-  - 输出：章节骨架文（情节结构、关键场景、对话要点）
+**7.2.2 阶段一：生成骨架**
+- 使用 `chapter_outline` 生成骨架文和强制约束清单
+  - 输入：章节信息、chapter_prep输出、角色卡、世界观
+  - 输出：
+    - 骨架文（开场、发展、高潮、结尾）
+    - **约束清单**（关键）：
+      - 禁止写的内容（超出大纲范围的内容）
+      - 必须达成的事件（章节大纲中的关键点）
+      - 时间/地点/角色状态限制
+      - 字数范围限制
 
-**2.2 创作阶段**（基于分析结果创作）：
-- 调用 `chapter_agent` 创作章节
-  - 使用 `chapter_write` 基于骨架文创作
-  - 使用 `dialogue_agent` 优化对话
+**7.2.3 阶段二：章节创作**
+- 调用 `continuation_agent` 创作章节
+  - **严格遵循骨架文结构**
+  - **严格遵守约束清单**
+  - **实时自检**：每500字检查一次
+    - 是否偏离骨架文？
+    - 是否超出约束清单？
+    - 是否在本章大纲范围内？
+  - 如发现偏离，立即纠正
 
-**2.3 章节质量检查**：
-- 使用 `dialogue_naturalization` 检查对话自然度
-- 使用 `plot_hole_detection` 检测漏洞
-- 使用 `world_consistency` 检查设定
-- 使用 `continuity_agent` 检查连贯性（局部：本章与前后章节）
-- 使用 `pacing_analysis` 分析节奏（局部：本章节奏）
-- 使用 `theme_analysis` 分析主题（局部：本章主题）
-- 使用 `emotional_arc` 分析情感（局部：本章情感）
+**7.2.4 阶段三：自动质量检查**
+- 使用 `auto_check` 后台自动运行
+  - 检查：对话自然度、节奏、情感、主题
+  - 输出：通过/不通过 + 简要问题列表
+- 如不通过，交由 `quality_agent` 修复
 
-**2.4 章节编辑润色**（基于检查结果优化）：
-- 使用 `editor_agent` 编辑润色
-  - 使用 `dialogue_naturalization` 优化对话（基于检查结果）
-  - 使用 `plot_hole_detection` 检查问题（基于检查结果）
+**7.2.5 阶段四：关键问题检查**
+- 调用 `quality_agent`
+  - 使用 `plot_hole_detection` 检测漏洞
+  - 使用 `world_consistency` 检查设定
+  - 如有问题，输出简要问题列表
 
-#### 3. 章节后续处理
+**7.2.6 阶段五：输出最终结果**
+- 输出给用户：
+  - 章节正文
+  - 创作说明（达成目标、关键情节、伏笔）
+  - 质量摘要：
+    - auto_check：通过/不通过
+    - plot_hole_detection：通过/不通过
+    - world_consistency：通过/不通过
+    - 字数统计
+- 呈现给用户确认
+- 保存到 `output/chapters/`
+
+#### 7.3 章节后续处理
 
 **每章完成后**：
 1. 呈现给用户确认
 2. 保存到 `output/chapters/`
-3. 调用 `word_count` 统计字数
-4. 调用 `progress_tracking` 更新进度
-
-5. 呈现给用户确认
-6. 保存到 `output/chapters/`
-7. 调用 `word_count` 统计字数
-8. 调用 `progress_tracking` 更新进度
+3. 字数统计（内部工具）
+4. 质量已达标：不需要后续审查
 
 每卷完成时：
-1. **卷级质量检查**：
-   - 调用 `continuity_agent` 检查连贯性（整卷）
-   - 调用 `pacing_analysis` 分析节奏（整卷）
-   - 调用 `character_arc_tracking` 追踪角色（整卷）
-   - 调用 `theme_analysis` 分析主题（整卷）
-   - 调用 `emotional_arc` 分析情感（整卷）
-2. 调用 `version_control` 创建版本
-3. 生成卷完成报告
+1. 调用 `version_control` 创建版本
+2. 生成卷完成报告
 
-### 阶段八：全面审查（全书完成后）
-1. 调用 `plot_review_agent` 审查情节（全书）
-2. 调用 `continuity_agent` 检查连贯性（全书）
-3. 调用 `plot_hole_detection` 检测漏洞（全书）
-4. 调用 `theme_analysis` 分析主题（全书）
-5. 调用 `emotional_arc` 分析情感（全书）
-6. 调用 `pacing_analysis` 分析节奏（全书）
-7. 调用 `character_arc_tracking` 追踪角色（全书）
-8. 生成全面审查报告
-
-### 阶段九：编辑润色（全书完成后）
-1. 调用 `editor_agent` 进行全局编辑
-    - 使用 `dialogue_naturalization` 优化对话（全局优化）
-    - 使用 `plot_hole_detection` 检查问题（全局检查）
-2. 生成编辑报告
-
-### 阶段十：最终检查
-1. 调用所有检查工具进行最后检查
-2. 验证所有质量指标
-3. 生成最终检查报告
-
-### 阶段十一：导出和交付
+### 阶段八：导出和交付
 1. 调用 `version_control` 创建最终版本
-2. 调用 `export_formatter` 导出多种格式
-3. 调用 `progress_tracking` 生成项目总结
-4. 保存到 `exports/` 文件夹
+2. 导出多种格式
+3. 生成项目总结
 
 ## 通用规范
 
-所有Agent和Skill遵循 `COMMON.md` 中的：
+所有Agent和Skill在其定义文件中都包含：
 - 输入输出规范
-- 质量检查清单
-- 工作流程标准
+- 质量检查标准
+- 工作流程说明
 - 注意事项
 
 ## 输出文件结构
@@ -467,17 +407,14 @@ progress_tracking
 ```
 project/
 ├── AGENTS.md                  # 系统架构文档
-├── COMMON.md                  # 通用规范
-├── templates.md               # 模板系统
 ├── README.md                  # 项目说明
 ├── .opencode/
 │   ├── agents/                # Agent定义
 │   └── skills/                # Skill工具定义
 ├── output/
 │   ├── style_guide.json       # 文风指南
-│   ├── progress.json          # 进度记录
 │   ├── chapters/              # 章节文件
-│   └── reports/               # 各类报告
+│   └── reports/               # 详细报告（用户要求时）
 ├── outline/                   # 大纲文件
 │   ├── 第1卷_卷标题.md
 │   └── ...
@@ -487,39 +424,101 @@ project/
 ├── world_building/            # 世界观文件
 │   ├── world_overview.md
 │   └── ...
-├── research/                  # 研究资料
 ├── versions/                  # 版本管理
-├── exports/                   # 导出文件
-└── reference/                 # 参考范文
+└── exports/                   # 导出文件
 ```
 
 ## 使用说明
 
 ### 第一次使用
-1. 阅读 `COMMON.md` 了解通用规范
-2. 阅读 `templates.md` 了解可用模板
-3. 从阶段一开始，逐步完成
+从阶段一开始，逐步完成
 
 ### 中断后继续
 所有内容保存在输出目录，进度自动追踪。可从任意阶段继续。
 
 ### 获取帮助
 - 阅读各个Agent和Skill的定义文件
-- 查看 `COMMON.md` 的通用规范
 - 参考示例和模板
 
-## 优化亮点
+## v2.0优化亮点
 
-1. **职责清晰**：Agent负责创造性工作，Skill负责工具化任务
-2. **交互明确**：Agent和Skill的调用关系清晰
-3. **简化重复**：通用规范提取到COMMON.md
-4. **便于扩展**：新功能可以作为新Agent或Skill添加
-5. **保持本质**：仍然是提示词系统，不是code项目
-6. **流程合理**：分析→创作→检查→优化，逻辑清晰
-7. **前两章简化**：前两章使用简化流程，快速进入创作
-8. **从第3章深度分析**：从第3章开始使用完整流程，确保质量
-9. **预创作分析**：所有分析工具在创作之前使用，为创作提供依据
-10. **多维度分析**：结合本卷大纲、前后章节、伏笔、角色语音、骨架文
-11. **角色一致性保障**：通过角色语音分析确保角色言行一致
-12. **伏笔管理**：通过伏笔分析确保伏笔的合理埋设和回收
-13. **质量循环**：创作→检查→优化，形成完整的质量保障闭环
+1. **架构精简**：Agent减少27%，Skill减少47%
+2. **防跑题机制**：骨架文+约束清单+实时自检，三层保障
+3. **自动化报告**：7个详细报告转为3个摘要，减少86%阅读量
+4. **聚焦核心**：只展示需要用户关注的关键问题
+5. **流程优化**：预分析从4个Skill减少到2个
+6. **用户友好**：每章只输出质量摘要，详细报告按需生成
+7. **质量保障**：创作时即确保质量，不需要事后审查
+
+## 防跑题机制详解
+
+### 三层保障
+
+**第一层：骨架文约束**
+- 明确列出每个部分应该写什么
+- 包含开场、发展、高潮、结尾的具体内容
+
+**第二层：约束清单（强制）**
+- 禁止写的内容：明确列出不能写的内容（超出大纲范围的内容）
+- 必须达成的事件：章节大纲中的关键点
+- 时间/地点/角色状态限制：确保一致性
+- 字数范围限制：控制篇幅
+
+**第三层：实时自检**
+- 每500字自动检查一次
+- 检查点：骨架文遵循度、约束清单遵循度、大纲范围
+- 如发现偏离，立即纠正
+
+### 违反约束的后果
+
+- 轻微偏离：continuation_agent自我纠正
+- 严重偏离：重新创作该部分
+- 完全不符合：重新创作整章
+
+## 质量检查机制详解
+
+### 每章检查（用户无感知）
+
+**自动检查（auto_check）**
+- 范围：对话自然度、节奏、情感、主题
+- 运行：后台自动运行
+- 输出：通过/不通过 + 3-5个要点
+- 用户看到：质量摘要中的一行
+
+**关键问题检查**
+- 范围：情节漏洞、世界观一致性
+- 运行：auto_check通过后运行
+- 输出：通过/不通过 + 3-5个要点
+- 用户看到：质量摘要中的一行
+
+### 每卷/全书检查（用户要求）
+
+**全面检查**
+- 范围：所有维度的详细检查
+- 运行：用户明确要求时
+- 输出：详细报告
+- 用户看到：完整的分析报告
+
+### 输出格式示例
+
+**每章输出**：
+```json
+{
+  "章节内容": "章节正文",
+  "创作说明": {...},
+  "质量摘要": {
+    "自动检查": {
+      "状态": "通过"
+    },
+    "情节漏洞": {
+      "状态": "通过"
+    },
+    "世界观一致性": {
+      "状态": "不通过",
+      "问题": [
+        "第3段提到荆杨使用手机，与设定不符"
+      ]
+    }
+  }
+}
+```

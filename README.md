@@ -5,8 +5,6 @@
 ## 快速开始
 
 1. 阅读 **AGENTS.md** 了解系统架构和工作流程
-2. 查看 **templates.md** 使用各类创作模板
-3. 参考 **COMMON.md** 了解通用规范
 
 ## 核心功能
 
@@ -39,42 +37,27 @@
 小说写作助手/
 ├── README.md                   # 项目说明
 ├── AGENTS.md                  # 系统架构和工作流程
-├── COMMON.md                  # 通用规范和标准
-├── templates.md               # 创作模板系统
 ├── .opencode/                 # OpenCode标准目录
-│   ├── agents/                # Agent定义（11个）
+│   ├── agents/                # Agent定义（8个）
 │   │   ├── outline_agent.md
 │   │   ├── character_agent.md
 │   │   ├── world_building_agent.md
 │   │   ├── style_agent.md
-│   │   ├── chapter_agent.md
-│   │   ├── dialogue_agent.md
-│   │   ├── plot_review_agent.md
-│   │   ├── continuity_agent.md
-│   │   ├── editor_agent.md
-│   │   ├── research_agent.md
+│   │   ├── golden_three_chapters_agent.md
+│   │   ├── continuation_agent.md
+│   │   ├── quality_agent.md
 │   │   └── feedback_agent.md
-│   └── skills/                # Skill工具定义（19个）
+│   └── skills/                # Skill工具定义（10个）
 │       ├── character_gen/SKILL.md
 │       ├── style_format/SKILL.md
 │       ├── chapter_write/SKILL.md
-│       ├── skeleton_outline/SKILL.md
+│       ├── chapter_outline/SKILL.md
 │       ├── interactive_guide/SKILL.md
-│       ├── chapter_context_analysis/SKILL.md
-│       ├── foreshadowing_analysis/SKILL.md
-│       ├── character_voice_analysis/SKILL.md
+│       ├── chapter_prep/SKILL.md
+│       ├── auto_check/SKILL.md
 │       ├── plot_hole_detection/SKILL.md
 │       ├── world_consistency/SKILL.md
-│       ├── dialogue_naturalization/SKILL.md
-│       ├── pacing_analysis/SKILL.md
-│       ├── emotional_arc/SKILL.md
-│       ├── theme_analysis/SKILL.md
-│       ├── character_arc_tracking/SKILL.md
-│       ├── version_control/SKILL.md
-│       ├── export_formatter/SKILL.md
-│       ├── progress_tracking/SKILL.md
-│       ├── word_count/SKILL.md
-│       └── outline_refine/SKILL.md
+│       └── version_control/SKILL.md
 ├── outline/                    # 大纲文件（使用时创建）
 ├── characters/                 # 角色文件（使用时创建）
 ├── world_building/             # 世界观文件（使用时创建）
@@ -116,12 +99,9 @@
 | character_agent | 角色创建 | 需要创建角色卡 |
 | world_building_agent | 世界观构建 | 需要构建设定背景 |
 | style_agent | 文风分析 | 需要确定写作风格 |
-| chapter_agent | 章节编写 | 需要创作章节内容 |
-| dialogue_agent | 对话优化 | 需要优化对话质量 |
-| plot_review_agent | 情节审查 | 需要检查情节逻辑 |
-| continuity_agent | 连贯性检查 | 需要检查一致性 |
-| editor_agent | 编辑润色 | 需要优化语言表达 |
-| research_agent | 资料研究 | 需要收集背景资料 |
+| golden_three_chapters_agent | 黄金三章创作 | 创作前三章内容 |
+| continuation_agent | 续写创作 | 创作第4章及以后内容 |
+| quality_agent | 质量控制 | 检查情节漏洞和世界观矛盾 |
 | feedback_agent | 反馈处理 | 需要处理修改请求 |
 
 ### Skill说明
@@ -184,8 +164,8 @@ A: 支持Markdown、文本、HTML、PDF、EPUB、DOCX等多种格式。
 
 这是一个基于提示词的系统，不是代码项目。所有Agent和Skill都通过自然语言指令工作。
 
-- **11个核心Agent** - 负责创造性任务
-- **19个Skill工具** - 负责功能性任务
+- **8个核心Agent** - 负责创造性任务
+- **10个Skill工具** - 负责功能性任务
 - **通用规范** - 统一的输入输出和质量标准
 
 ## 开始创作
