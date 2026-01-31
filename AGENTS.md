@@ -19,6 +19,7 @@
 | Agent | 功能 | 说明 |
 |-------|------|------|
 | **outline** | 大纲设计 | 创建完整故事大纲，支持多卷结构 |
+| **title_intro** | 标题与简介 | 生成吸引人的标题和简介 |
 | **character** | 角色创建 | 生成详细角色卡和成长弧光 |
 | **world_building** | 世界观构建 | 构建完整的多维设定系统 |
 | **style** | 文风分析 | 分析范文或确定文风偏好 |
@@ -62,8 +63,9 @@
 ```
 小说写作助手/
 ├── .opencode/
-│   ├── agents/                # Agent定义（9个）
+│   ├── agents/                # Agent定义（10个）
 │   │   ├── outline.md
+│   │   ├── title_intro.md
 │   │   ├── character.md
 │   │   ├── world_building.md
 │   │   ├── style.md
@@ -111,6 +113,13 @@
 ├─ outline Agent：创建完整大纲
 └─ interactive_guide Skill：引导补充信息
 
+标题与简介
+├─ title_intro Agent：生成吸引人的标题和简介
+│   ├─ 提取核心冲突和看点
+│   ├─ 生成多个标题方案
+│   ├─ 撰写吸引人的简介
+│   └─ 保存为 title_intro.json
+│
 角色创建
 ├─ character Agent：创建角色卡
 └─ character_gen Skill：格式化输出
@@ -264,6 +273,7 @@ delegate_task(
 | subagent_type | 对应文件 | 功能 |
 |---------------|----------|------|
 | `outline` | `.opencode/agents/outline.md` | 大纲设计 |
+| `title_intro` | `.opencode/agents/title_intro.md` | 标题与简介 |
 | `character` | `.opencode/agents/character.md` | 角色创建 |
 | `world_building` | `.opencode/agents/world_building.md` | 世界观构建 |
 | `style` | `.opencode/agents/style.md` | 文风分析 |

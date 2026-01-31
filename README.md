@@ -16,6 +16,7 @@
 ### 创作功能
 
 - ✅ **大纲设计** - 支持多卷结构，逐步完善
+- ✅ **标题与简介** - 生成吸引人的标题和简介
 - ✅ **角色创建** - 生成详细角色卡和成长弧光
 - ✅ **世界观构建** - 完整的多维设定系统
 - ✅ **文风分析** - 分析范文或确定文风偏好
@@ -43,8 +44,9 @@
 ├── README.md                   # 项目说明（本文件）
 ├── AGENTS.md                  # 系统架构和工作流程
 ├── .opencode/
-│   ├── agents/                # Agent定义（9个）
+│   ├── agents/                # Agent定义（10个）
 │   │   ├── outline.md
+│   │   ├── title_intro.md
 │   │   ├── character.md
 │   │   ├── world_building.md
 │   │   ├── style.md
@@ -91,31 +93,34 @@
 1. 大纲设计
    └─ outline Agent
 
-2. 角色创建
+2. 标题与简介
+   └─ title_intro Agent
+
+3. 角色创建
    └─ character Agent
 
-3. 世界观构建（可选）
+4. 世界观构建（可选）
    └─ world_building Agent
 
-4. 文风确定
+5. 文风确定
    └─ style Agent
 
-5. 黄金三章创作
+6. 黄金三章创作
    └─ golden_three_chapters Agent
        └─ 自动质量检查与修复
 
-6. 续写创作（第4章及以后）
+7. 续写创作（第4章及以后）
    └─ continuation Agent
        ├─ chapter_prep Skill（准备）
        ├─ chapter_outline Skill（骨架+约束）
        ├─ 实时自检（每500字）
        └─ 自动质量检查与修复
 
-7. 质量检查与修复
+8. 质量检查与修复
    ├─ quality_inspector Agent（检查）
    └─ quality_fixer Agent（修复）
 
-8. 反馈修改
+9. 反馈修改
    └─ feedback Agent
 ```
 
@@ -142,6 +147,7 @@
 | Agent | 功能 | 何时使用 |
 |-------|------|----------|
 | **outline** | 大纲设计 | 需要创建或完善故事大纲 |
+| **title_intro** | 标题与简介 | 需要生成吸引人的标题和简介 |
 | **character** | 角色创建 | 需要创建角色卡 |
 | **world_building** | 世界观构建 | 需要构建设定背景 |
 | **style** | 文风分析 | 需要确定写作风格 |
@@ -242,6 +248,7 @@ delegate_task(
 | subagent_type | 对应文件 | 功能 |
 |---------------|----------|------|
 | `outline` | `.opencode/agents/outline.md` | 大纲设计 |
+| `title_intro` | `.opencode/agents/title_intro.md` | 标题与简介 |
 | `character` | `.opencode/agents/character.md` | 角色创建 |
 | `world_building` | `.opencode/agents/world_building.md` | 世界观构建 |
 | `style` | `.opencode/agents/style.md` | 文风分析 |
