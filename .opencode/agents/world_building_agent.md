@@ -1,10 +1,6 @@
 ---
-name: world_building
 description: 创建完整、自洽、引人入胜的世界观设定
 mode: subagent
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 世界观构建Agent

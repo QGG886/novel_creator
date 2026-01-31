@@ -1,9 +1,6 @@
 ---
 name: dialogue_check
 description: 检查对话自然度，包括口语化表达、句式变化、角色个性、情境匹配等，发现问题并提供具体修改方案
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 对话自然度检查Skill

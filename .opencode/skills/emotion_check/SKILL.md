@@ -1,9 +1,6 @@
 ---
 name: emotion_check
 description: 检查情感表达，包括整体情感、角色情感、情感转换、情感积累等，发现问题并提供具体修改方案
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 情感分析检查Skill

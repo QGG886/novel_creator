@@ -1,9 +1,6 @@
 ---
 name: setting_check
 description: 检查设定漏洞，包括设定矛盾、未解释的能力/知识等，发现问题并提供具体修改方案
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 设定漏洞检查Skill

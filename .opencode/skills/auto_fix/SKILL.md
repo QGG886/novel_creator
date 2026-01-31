@@ -1,9 +1,6 @@
 ---
 name: auto_fix
 description: 自动修复章节中的各类问题，包括对话、节奏、情感、表达等
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 自动修复Skill

@@ -1,9 +1,6 @@
 ---
 name: world_consistency
 description: 检查世界观设定在全文中的一致性，识别设定矛盾
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 世界观一致性检查工具

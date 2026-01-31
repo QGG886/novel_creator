@@ -1,9 +1,6 @@
 ---
 name: version_control
 description: 管理小说创作的多个版本，支持版本记录、对比、恢复和导出
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 版本管理工具

@@ -1,9 +1,6 @@
 ---
 name: chapter_outline
 description: 设计本章具体情节的展开，写出骨架文，并生成强制约束清单，防止章节跑题
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 章节骨架Skill

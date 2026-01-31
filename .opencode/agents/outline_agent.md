@@ -1,10 +1,6 @@
 ---
-name: outline
 description: 理解用户想法，设计故事结构，生成完整大纲
 mode: subagent
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 大纲设计Agent

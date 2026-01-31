@@ -1,9 +1,6 @@
 ---
 name: rhythm_check
 description: 检查章节叙述节奏，包括信息密度、动作密度、情感强度、高潮位置等，发现问题并提供具体修改方案
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 节奏分析检查Skill

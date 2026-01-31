@@ -1,9 +1,6 @@
 ---
 name: plot_check
 description: 检查情节漏洞，包括未解决的伏笔、未解释的关键信息等，发现问题并提供具体修改方案
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 情节漏洞检查Skill

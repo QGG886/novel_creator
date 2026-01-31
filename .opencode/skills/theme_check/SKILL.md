@@ -1,9 +1,6 @@
 ---
 name: theme_check
 description: 检查主题表达，包括核心主题、主题一致性、主题深度等，发现问题并提供具体修改方案
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 主题分析检查Skill

@@ -1,9 +1,6 @@
 ---
 name: logic_check
 description: 检查逻辑漏洞，包括因果关系、行为动机、事件发展等，发现问题并提供具体修改方案
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 逻辑漏洞检查Skill

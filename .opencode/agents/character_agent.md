@@ -1,10 +1,6 @@
 ---
-name: character
 description: 创建立体、生动的角色设定，规划角色弧光和关系网络
 mode: subagent
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 角色创建Agent

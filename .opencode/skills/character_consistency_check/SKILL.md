@@ -1,9 +1,6 @@
 ---
 name: character_consistency_check
 description: 检查角色一致性，包括行为、能力、记忆、关系等，发现问题并提供具体修改方案
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 角色一致性检查Skill

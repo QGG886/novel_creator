@@ -1,10 +1,6 @@
 ---
-name: quality_inspector
 description: 质量检查专家，协调多个检查工具进行全面质量审查，生成详细的质量报告
 mode: subagent
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 质量检查Agent

@@ -1,9 +1,6 @@
 ---
 name: chapter_prep
 description: 一次性完成章节创作的所有预分析工作，整合上下文分析、伏笔安排和角色语音指导
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 章节准备Skill

@@ -1,9 +1,6 @@
 ---
 name: style_format
 description: 将文风信息格式化为结构化的、可指导写作的文风指南
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 文风格式化工具

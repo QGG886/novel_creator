@@ -1,9 +1,6 @@
 ---
 name: timeline_check
 description: 检查时间线，包括时间顺序、时间跨度、年龄计算等，发现问题并提供具体修改方案
-metadata:
-  language: markdown
-  framework: novel-creation
 ---
 
 # 时间线检查Skill
