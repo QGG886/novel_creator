@@ -43,16 +43,16 @@
 ├── README.md                   # 项目说明（本文件）
 ├── AGENTS.md                  # 系统架构和工作流程
 ├── .opencode/
-│   ├── agents/                # Agent定义（8个）
-│   │   ├── outline_agent.md
-│   │   ├── character_agent.md
-│   │   ├── world_building_agent.md
-│   │   ├── style_agent.md
-│   │   ├── golden_three_chapters_agent.md
-│   │   ├── continuation_agent.md
-│   │   ├── quality_inspector_agent.md
-│   │   ├── quality_fixer_agent.md
-│   │   └── feedback_agent.md
+│   ├── agents/                # Agent定义（9个）
+│   │   ├── outline.md
+│   │   ├── character.md
+│   │   ├── world_building.md
+│   │   ├── style.md
+│   │   ├── golden_three_chapters.md
+│   │   ├── continuation.md
+│   │   ├── quality_inspector.md
+│   │   ├── quality_fixer.md
+│   │   └── feedback.md
 │   └── skills/                # Skill工具定义（16个）
 │       ├── interactive_guide/SKILL.md
 │       ├── character_gen/SKILL.md
@@ -184,6 +184,79 @@
 3. **世界观可选** - 根据故事需要决定是否构建详细世界观
 4. **定期检查** - 利用质量控制系统定期检查和改进
 5. **版本管理** - 重要节点及时创建版本
+
+---
+
+## Agent 和 Skill 调用规范
+
+### 调用 Agent
+
+所有 Agent 都使用 `delegate_task()` 工具调用，传入 `subagent_type` 参数：
+
+```python
+# 调用创作类 Agent
+delegate_task(
+    subagent_type="outline",  # Agent名称对应 .opencode/agents/outline.md
+    load_skills=["interactive_guide", "plot_check"],
+    prompt="创作一个三国题材的大纲...",
+    run_in_background=false
+)
+
+# 调用质量控制类 Agent
+delegate_task(
+    subagent_type="quality_inspector",
+    load_skills=["dialogue_check", "rhythm_check", "emotion_check"],
+    prompt="检查第4章的质量...",
+    run_in_background=false
+)
+
+# Agent 之间互相调用（在 Agent 内部）
+delegate_task(
+    subagent_type="quality_fixer",
+    session_id=previous_session_id,  # 保持上下文
+    prompt="修复质量检查发现的问题",
+    run_in_background=false
+)
+```
+
+### 调用 Skill
+
+Skill 只有一种调用方式：作为 `load_skills` 参数传递给 Agent
+
+```python
+delegate_task(
+    subagent_type="continuation",
+    load_skills=["chapter_prep", "chapter_outline", "dialogue_check"],
+    prompt="创作第4章...",
+    ...
+)
+```
+
+**说明**：
+- 系统会自动从 `.opencode/skills/<skill_name>/SKILL.md` 加载 Skill 定义
+- Skill 的定义会被注入到 Agent 的上下文中
+- Agent 可以根据需要调用这些 Skill 提供的功能
+
+### 可用的 Agent 列表
+
+| subagent_type | 对应文件 | 功能 |
+|---------------|----------|------|
+| `outline` | `.opencode/agents/outline.md` | 大纲设计 |
+| `character` | `.opencode/agents/character.md` | 角色创建 |
+| `world_building` | `.opencode/agents/world_building.md` | 世界观构建 |
+| `style` | `.opencode/agents/style.md` | 文风分析 |
+| `golden_three_chapters` | `.opencode/agents/golden_three_chapters.md` | 黄金三章创作 |
+| `continuation` | `.opencode/agents/continuation.md` | 续写创作 |
+| `quality_inspector` | `.opencode/agents/quality_inspector.md` | 质量检查 |
+| `quality_fixer` | `.opencode/agents/quality_fixer.md` | 质量修复 |
+| `feedback` | `.opencode/agents/feedback.md` | 反馈处理 |
+
+### 重要提示
+
+- ✅ **必须使用 `subagent_type`** 调用你定义的 Agent（不要使用 `category`）
+- ✅ **使用 `load_skills`** 为 Agent 配置所需的 Skill 工具
+- ✅ **保持 `session_id`** 在 Agent 之间调用时传递上下文
+- ❌ **不要使用 `category`** 调用自定义 Agent（`category` 仅用于系统预定义的通用类型）
 
 ---
 
