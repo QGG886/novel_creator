@@ -1,6 +1,7 @@
 ---
 name: golden_three_chapters
 description: 一口气生成前三章，确保高度连贯性，快速建立吸引人的开篇
+mode: subagent
 metadata:
   language: markdown
   framework: novel-creation

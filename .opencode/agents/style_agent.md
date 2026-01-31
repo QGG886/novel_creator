@@ -1,6 +1,7 @@
 ---
 name: style
 description: 分析范文或用户偏好，生成可指导写作的文风指南
+mode: subagent
 metadata:
   language: markdown
   framework: novel-creation

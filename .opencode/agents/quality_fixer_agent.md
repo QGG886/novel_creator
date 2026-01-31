@@ -1,6 +1,7 @@
 ---
 name: quality_fixer
 description: 质量修复专家，分析质量报告，执行自动修复，验证修复效果
+mode: subagent
 metadata:
   language: markdown
   framework: novel-creation

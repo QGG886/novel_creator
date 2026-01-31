@@ -1,6 +1,7 @@
 ---
 name: continuation
 description: 创作第4章及以后的章节，严格遵循骨架文和约束清单，确保不跑题
+mode: subagent
 metadata:
   language: markdown
   framework: novel-creation

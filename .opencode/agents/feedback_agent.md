@@ -1,6 +1,7 @@
 ---
 name: feedback
 description: 理解用户反馈，协调各个Agent进行修改
+mode: subagent
 metadata:
   language: markdown
   framework: novel-creation
