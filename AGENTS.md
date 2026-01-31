@@ -1,524 +1,219 @@
-# 小说写作助手(重构版v2.0)
+# 小说写作助手系统
 
-## 项目定位
-这是一个基于多Agent协作的智能小说写作助手，通过明确的职责分工和工具化Skill，帮助用户从大纲设计到逐章创作完成一部小说。
+基于多Agent协作的智能小说创作系统，帮助你从大纲到逐章创作完成高质量小说。
 
-**v2.0重构亮点**：
-- ✅ **架构精简**：从11个Agent+19个Skill精简到8个Agent+10个Skill
-- ✅ **防跑题机制**：强制约束框架+实时自检，确保章节内容不超大纲范围
-- ✅ **自动化报告**：7个分析报告转为后台自动检查，只输出摘要
-- ✅ **聚焦核心**：只展示需要用户关注的关键问题
+---
 
-## 项目结构
-- **Agent定义**：`.opencode/agents/` - 各Agent的详细定义文件
-- **Skill定义**：`.opencode/skills/` - 各Skill的详细定义文件
-- **主架构文档**：本文档(`AGENTS.md`)
+## 快速开始
+
+1. 选择你需要的功能模块
+2. 根据提示提供相关信息
+3. 系统自动生成内容并保存
+
+---
+
+## 核心功能
+
+### 创作功能
+
+| Agent | 功能 | 说明 |
+|-------|------|------|
+| **outline** | 大纲设计 | 创建完整故事大纲，支持多卷结构 |
+| **character** | 角色创建 | 生成详细角色卡和成长弧光 |
+| **world_building** | 世界观构建 | 构建完整的多维设定系统 |
+| **style** | 文风分析 | 分析范文或确定文风偏好 |
+| **golden_three_chapters** | 黄金三章创作 | 一口气生成前三章，确保高度连贯 |
+| **continuation** | 续写创作 | 创作第4章及以后，防止跑题 |
+
+### 质量控制
+
+| Agent | 功能 | 说明 |
+|-------|------|------|
+| **quality_inspector** | 质量检查 | 协调检查工具，识别并分类问题 |
+| **quality_fixer** | 质量修复 | 自动修复问题，验证修复效果 |
+| **feedback** | 反馈处理 | 处理修改请求，协调各Agent |
+
+### Skill工具
+
+| Skill | 功能 | 类型 |
+|-------|------|------|
+| **interactive_guide** | 交互式引导 | 引导工具 |
+| **character_gen** | 角色卡格式化 | 格式化工具 |
+| **style_format** | 文风格式化 | 格式化工具 |
+| **chapter_prep** | 章节准备 | 创作工具 |
+| **chapter_outline** | 章节骨架 | 创作工具 |
+| **dialogue_check** | 对话自然度检查 | 检查工具 |
+| **rhythm_check** | 节奏分析检查 | 检查工具 |
+| **emotion_check** | 情感分析检查 | 检查工具 |
+| **theme_check** | 主题分析检查 | 检查工具 |
+| **logic_check** | 逻辑漏洞检查 | 检查工具 |
+| **setting_check** | 设定漏洞检查 | 检查工具 |
+| **plot_check** | 情节漏洞检查 | 检查工具 |
+| **character_consistency_check** | 角色一致性检查 | 检查工具 |
+| **timeline_check** | 时间线检查 | 检查工具 |
+| **world_consistency** | 世界观一致性检查 | 检查工具 |
+| **auto_fix** | 自动修复（批量执行修改方案） | 修复工具 |
+| **version_control** | 版本管理 | 管理工具 |
+
+---
+
+## 文件结构
+
+```
+小说写作助手/
+├── .opencode/
+│   ├── agents/                # Agent定义（8个）
+│   │   ├── outline_agent.md
+│   │   ├── character_agent.md
+│   │   ├── world_building_agent.md
+│   │   ├── style_agent.md
+│   │   ├── golden_three_chapters_agent.md
+│   │   ├── continuation_agent.md
+│   │   ├── quality_inspector_agent.md
+│   │   ├── quality_fixer_agent.md
+│   │   └── feedback_agent.md
+│   └── skills/                # Skill工具定义（16个）
+│       ├── interactive_guide/SKILL.md
+│       ├── character_gen/SKILL.md
+│       ├── style_format/SKILL.md
+│       ├── chapter_prep/SKILL.md
+│       ├── chapter_outline/SKILL.md
+│       ├── dialogue_check/SKILL.md
+│       ├── rhythm_check/SKILL.md
+│       ├── emotion_check/SKILL.md
+│       ├── theme_check/SKILL.md
+│       ├── logic_check/SKILL.md
+│       ├── setting_check/SKILL.md
+│       ├── plot_check/SKILL.md
+│       ├── character_consistency_check/SKILL.md
+│       ├── timeline_check/SKILL.md
+│       ├── world_consistency/SKILL.md
+│       ├── auto_fix/SKILL.md
+│       └── version_control/SKILL.md
+├── output/                     # 输出文件
+│   ├── chapters/              # 章节文件
+│   ├── style_guide.json       # 文风指南
+│   └── reports/               # 详细报告
+├── outline/                    # 大纲文件
+├── characters/                 # 角色文件
+├── world_building/             # 世界观文件
+└── versions/                   # 版本管理
+```
+
+---
+
+## 创作流程
+
+### 阶段1：准备阶段
+
+```
+大纲设计
+├─ outline Agent：创建完整大纲
+└─ interactive_guide Skill：引导补充信息
+
+角色创建
+├─ character Agent：创建角色卡
+└─ character_gen Skill：格式化输出
+
+世界观构建
+├─ world_building Agent：构建设定
+└─ world_consistency Skill：检查一致性
+
+文风确定
+├─ style Agent：分析范文或收集偏好
+└─ style_format Skill：格式化指南
+```
+
+### 阶段2：黄金三章创作
+
+```
+golden_three_chapters Agent
+├─ 一口气生成前三章
+├─ 确保高度连贯性
+└─ 快速建立吸引人的开篇
+
+质量检查与修复
+├─ quality_inspector Agent：多维质量检查
+│   ├─ dialogue_check Skill（对话）
+│   ├─ rhythm_check Skill（节奏）
+│   ├─ emotion_check Skill（情感）
+│   ├─ theme_check Skill（主题）
+│   ├─ logic_check Skill（逻辑）
+│   ├─ setting_check Skill（设定）
+│   ├─ plot_check Skill（情节）
+│   ├─ character_consistency_check Skill（角色）
+│   ├─ timeline_check Skill（时间线）
+│   └─ world_consistency Skill（世界观）
+└─ quality_fixer Agent：自动修复问题
+    ├─ 批量执行修改方案（auto_fix Skill）
+    └─ 验证修复效果
+```
+
+### 阶段3：续写创作（第4章及以后）
+
+```
+continuation Agent
+├─ 阶段零：chapter_prep Skill（获取上下文）
+│   ├─ 上下文分析
+│   ├─ 伏笔安排
+│   └─ 角色语音指导
+│
+├─ 阶段一：chapter_outline Skill（生成骨架）
+│   ├─ 骨架文（开场、发展、高潮、结尾）
+│   └─ 强制约束清单（防跑题）
+│
+├─ 阶段二：章节创作
+│   ├─ 严格遵循骨架文结构
+│   ├─ 严格遵守约束清单
+│   └─ 实时自检每500字
+│
+└─ 阶段三：质量检查与修复
+    ├─ quality_inspector Agent（检查）
+    │   ├─ dialogue_check Skill
+    │   ├─ rhythm_check Skill
+    │   ├─ emotion_check Skill
+    │   ├─ theme_check Skill
+    │   ├─ logic_check Skill
+    │   ├─ setting_check Skill
+    │   ├─ plot_check Skill
+    │   ├─ character_consistency_check Skill
+    │   ├─ timeline_check Skill
+    │   └─ world_consistency Skill
+    └─ quality_fixer Agent（修复）
+        ├─ 批量执行修改方案（auto_fix Skill）
+        └─ 验证修复效果
+```
+
+---
 
 ## 核心理念
 
 ### Agent vs Skill
+
 - **Agent**：负责创造性工作，需要与用户交互，做出创作决策
-- **Skill**：作为工具使用，负责功能性任务(检查、格式化、分析)，有明确的输入输出
+- **Skill**：作为工具使用，负责功能性任务（检查、格式化、分析），有明确的输入输出
 
-## Agent列表(创造性工作)
+### 防跑题机制
 
-### 核心创作Agent(6个)
-1. **outline_agent**：大纲设计
-   - 理解用户想法，设计故事结构
-   - 交互式引导，补充信息
-   - 生成完整大纲
+续写创作采用三层保障：
+1. **骨架文约束**：明确章节结构
+2. **强制约束清单**：禁止写的内容、必须达成的事件、限制条件
+3. **实时自检**：每500字检查一次
 
-2. **character_agent**：角色创建
-   - 设计角色性格和背景
-   - 规划角色弧光
-   - 建立关系网络
+### 质量保证
 
-3. **world_building_agent**：世界观构建
-   - 设计世界观框架
-   - 构建多维设定
-   - 确保自洽性
+- **多维检查**：对话、节奏、情感、主题、情节漏洞、世界观一致性
+- **自动修复**：60-80%的问题可自动修复
+- **闭环验证**：修复后自动验证，确保无新问题
+- **简洁报告**：清晰的问题分级和修复建议
 
-4. **style_agent**：文风分析
-   - 分析范文或用户偏好
-   - 生成文风指南
-   - 提取典型示例
+---
 
-5. **golden_three_chapters_agent**：黄金三章创作
-   - 一口气生成前三章
-   - 确保三章高度连贯
-   - 快速建立吸引人的开篇
-   - 拆分输出落地
-   - 为后续章节铺平道路
+## 使用建议
 
-6. **continuation_agent**：续写创作（重构：从chapter_agent拆分）
-   - 创作第4章及以后的章节内容
-   - 严格遵循骨架文和约束清单
-   - 与前后章节保持高度连贯
-   - **防跑题机制**：实时自检每500字，防止偏离大纲范围
-   - 处理长期伏笔的埋设和回收
+1. **按顺序使用**：先完成准备阶段，再进行章节创作
+2. **保持连贯**：每个阶段都基于前一个阶段的成果
+3. **及时检查**：利用质量检查工具及时发现问题
+4. **灵活调整**：根据反馈随时修改和完善
 
-### 质量控制Agent(1个)
-6. **quality_agent**：质量控制（重构：合并plot_review_agent、continuity_agent、editor_agent）
-   - 自动化运行质量检查工具
-    - 识别关键问题（情节漏洞、世界观矛盾）
-    - 提供简要修复建议
-    - 章节质量问题的修复（创作后发现问题）
-
-### 辅助Agent(1个)
-7. **feedback_agent**：反馈处理
-   - 理解用户反馈
-   - 协调修改
-   - 追踪进度
-
-## Skill列表(辅助工具)
-
-### 引导工具(1个)
-1. **interactive_guide**：交互式引导
-   - 生成引导性问题
-   - 收集用户偏好
-   - 辅助决策
-
-### 格式化工具(3个)
-2. **character_gen**：角色卡格式化
-3. **style_format**：文风格式化
-4. **chapter_write**：章节模板应用
-
-### 章节创作工具(3个)
-5. **chapter_prep**：章节准备（重构：合并chapter_context_analysis、foreshadowing_analysis、character_voice_analysis）
-   - 分析前两章剧情（从第3章开始）
-   - 分析伏笔安排
-   - 分析角色语音
-   - 一次性输出创作所需的所有上下文信息
-
-6. **chapter_outline**：章节骨架（重构：skeleton_outline强化版）
-   - 生成章节骨架文
-   - **生成强制约束清单**（关键新功能）
-     - 禁止写的内容
-     - 必须达成的事件
-     - 时间/地点/角色状态限制
-     - 字数范围限制
-
-7. **auto_check**：自动检查（重构：合并dialogue_naturalization、pacing_analysis、emotional_arc、theme_analysis）
-   - 后台自动运行
-   - 检查：对话自然度、节奏、情感、主题
-   - 只输出：通过/不通过 + 简要问题列表
-
-### 关键检查工具(2个)
-8. **plot_hole_detection**：情节漏洞检测
-   - 识别逻辑漏洞
-   - 发现前后矛盾
-   - 输出简要问题列表
-
-9. **world_consistency**：世界观一致性检查
-   - 检查设定一致
-   - 验证规则遵循
-   - 输出简要问题列表
-
-### 管理工具(1个)
-10. **version_control**：版本管理
-    - 创建版本
-    - 比较版本
-    - 回滚版本
-
-## 架构对比
-
-### v1.0 vs v2.0
-
-| 项目 | v1.0 | v2.0 | 优化 |
-|------|------|------|------|
-| Agent数量 | 11个 | 8个 | -27% |
-| Skill数量 | 19个 | 10个 | -47% |
-| 每章预分析调用 | 4个Skill | 2个Skill | -50% |
-| 每章质量检查 | 7个报告 | 3个摘要 | -57% |
-| 跑题控制 | 无强制约束 | 骨架文+约束清单+实时自检 | ✅ |
-| 用户阅读量 | 7个详细报告 | 1个质量摘要 | -86% |
-
-## Agent与Skill交互关系
-
-### 交互原则
-1. **Agent主导**：Agent负责核心工作，Skill作为工具被调用
-2. **按需调用**：只在需要时调用相关Skill
-3. **工具定位**：Skill有明确的输入输出，标准化执行
-
-### 典型交互流程
-
-#### 1. 大纲设计阶段
-```
-outline_agent (主)
-  ↓ 使用
-interactive_guide (生成引导问题)
-  ↓ 使用
-plot_hole_detection (检查漏洞)
-  ↓ 使用
-auto_check (检查节奏，仅分析维度)
-```
-
-#### 2. 角色创建阶段
-```
-character_agent (主)
-  ↓ 使用
-interactive_guide (生成引导问题)
-  ↓ 使用
-character_gen (格式化角色卡)
-```
-
-#### 3. 世界观构建阶段
-```
-world_building_agent (主)
-  ↓ 使用
-world_consistency (检查一致性)
-```
-
-#### 4. 文风确定阶段
-```
-style_agent (主)
-  ↓ 使用
-interactive_guide (收集用户偏好)
-  ↓ 使用
-style_format (格式化文风指南)
-```
-
-#### 5. 章节创作阶段（v2.0核心流程）
-
-**5.1 黄金三章创作**
-```
-创作阶段：
-  ↓ 使用
-golden_three_chapters_agent (主)
-  ├─ 一口气生成前三章
-  ├─ 确保三章高度连贯
-  ├─ 快速建立吸引人的开篇
-  └─ 拆分输出落地
-
-质量检查：
-  ↓ 使用
-auto_check (自动运行，后台)
-  ↓ 使用
-plot_hole_detection (检查情节连贯性)
-  ↓ 使用
-world_consistency (检查世界观一致性)
-```
-
-**5.2 续写创作（第4章及以后）**
-```
-阶段零：章节准备
-  ↓ 使用
-chapter_prep (一次性生成所有上下文)
-  ├─ 输入：章节信息、本卷大纲、前后章节大纲、已写章节、角色卡
-  └─ 输出：上下文分析、伏笔安排、角色语音指导
-
-阶段一：生成骨架
-  ↓ 使用
-chapter_outline (生成骨架文+强制约束清单)
-  ├─ 输入：章节信息、chapter_prep输出、角色卡、世界观
-  └─ 输出：
-      ├─ 骨架文（开场、发展、高潮、结尾）
-      └─ 约束清单（禁止写的内容、必须达成的事件、限制条件）
-
-阶段二：章节创作
-  ↓ 使用
-continuation_agent (主)
-  ├─ 严格遵循骨架文结构
-  ├─ 严格遵守约束清单
-  ├─ 实时自检：每500字检查一次
-  │   ├─ 是否偏离骨架文？
-  │   ├─ 是否超出约束清单？
-  │   └─ 是否在本章大纲范围内？
-  └─ 如发现偏离，立即纠正
-
-阶段三：自动质量检查
-  ↓ 使用
-auto_check (后台自动运行)
-  ├─ 检查：对话自然度、节奏、情感、主题
-  └─ 输出：通过/不通过 + 简要问题列表
-
-阶段四：关键问题检查
-  ↓ 使用
-quality_agent (调用)
-  ├─ plot_hole_detection (情节漏洞)
-  └─ world_consistency (世界观一致性)
-
-阶段五：输出最终结果
-  输出给用户：
-  ├─ 章节正文
-  ├─ 创作说明
-  └─ 质量摘要（通过/不通过 + 简要问题）
-```
-
-#### 6. 导出和交付阶段
-```
-feedback_agent (协调)
-  ↓ 使用
-version_control
-  ↓ 使用
-progress_tracking (内部工具，不作为独立Skill)
-```
-
-## 完整工作流程
-
-### 阶段零：项目初始化
-1. 确认项目基本信息
-
-### 阶段一：需求分析
-1. 调用 `interactive_guide` 生成引导问题
-2. 收集用户的初始想法
-3. 确定项目规模和类型
-4. 制定工作计划
-
-### 阶段二：大纲设计
-1. 调用 `outline_agent` 设计大纲
-   - 使用 `interactive_guide` 补充信息
-   - 使用 `plot_hole_detection` 检查漏洞
-2. 保存大纲到 `outline/` 文件夹
-3. 调用 `version_control` 创建版本
-
-### 阶段三：角色创建
-1. 从大纲提取角色需求
-2. 调用 `character_agent` 创建角色
-   - 使用 `interactive_guide` 了解偏好
-   - 使用 `character_gen` 格式化角色卡
-3. 保存角色卡到 `characters/` 文件夹
-
-### 阶段四：世界观构建(可选)
-1. 识别世界观需求
-2. 调用 `world_building_agent` 构建设定
-3. 调用 `world_consistency` 验证一致性
-4. 保存设定到 `world_building/` 文件夹
-
-### 阶段五：文风确定
-1. 检查是否有范文
-2. 有范文：调用 `style_agent` 分析
-   - 使用 `style_format` 格式化指南
-3. 无范文：调用 `interactive_guide` 收集偏好
-   - 调用 `style_agent` 生成指南
-   - 使用 `style_format` 格式化指南
-4. 保存文风指南到 `output/style_guide.json`
-
-### 阶段六：预创作检查
-1. 调用 `plot_hole_detection` 检查大纲
-2. 生成预创作报告
-
-### 阶段七：逐章创作与质量检查
-
-#### 7.1 黄金三章创作
-
-**7.1.1 创作阶段**
-- 调用 `golden_three_chapters_agent` 创作前三章
-  - 一口气生成前三章的完整内容
-  - 确保三章之间的高度连贯性
-  - 快速建立吸引人的开篇
-  - 拆分输出为独立章节文件
-
-**7.1.2 质量检查**
-- 使用 `auto_check` 自动检查（后台运行）
-  - 检查：对话自然度、节奏、情感、主题
-  - 输出：通过/不通过 + 简要问题列表
-- 使用 `plot_hole_detection` 检查情节连贯性
-- 使用 `world_consistency` 检查世界观一致性
-- 如不通过，交由 `quality_agent` 修复
-
-**7.1.3 章节输出**
-- 呈现给用户确认
-- 保存到 `output/chapters/`
-- 输出质量摘要
-
-#### 7.2 续写创作（第4章及以后）
-
-**7.2.1 阶段零：章节准备**
-- 使用 `chapter_prep` 一次性生成所有上下文
-  - 输入：章节信息、本卷大纲、前后章节大纲、已写章节、角色卡
-  - 输出：
-    - 上下文分析（时间线、地点、角色状态）
-    - 伏笔安排（需要埋设的、需要回收的）
-    - 角色语音指导（每个角色的说话特点）
-
-**7.2.2 阶段一：生成骨架**
-- 使用 `chapter_outline` 生成骨架文和强制约束清单
-  - 输入：章节信息、chapter_prep输出、角色卡、世界观
-  - 输出：
-    - 骨架文（开场、发展、高潮、结尾）
-    - **约束清单**（关键）：
-      - 禁止写的内容（超出大纲范围的内容）
-      - 必须达成的事件（章节大纲中的关键点）
-      - 时间/地点/角色状态限制
-      - 字数范围限制
-
-**7.2.3 阶段二：章节创作**
-- 调用 `continuation_agent` 创作章节
-  - **严格遵循骨架文结构**
-  - **严格遵守约束清单**
-  - **实时自检**：每500字检查一次
-    - 是否偏离骨架文？
-    - 是否超出约束清单？
-    - 是否在本章大纲范围内？
-  - 如发现偏离，立即纠正
-
-**7.2.4 阶段三：自动质量检查**
-- 使用 `auto_check` 后台自动运行
-  - 检查：对话自然度、节奏、情感、主题
-  - 输出：通过/不通过 + 简要问题列表
-- 如不通过，交由 `quality_agent` 修复
-
-**7.2.5 阶段四：关键问题检查**
-- 调用 `quality_agent`
-  - 使用 `plot_hole_detection` 检测漏洞
-  - 使用 `world_consistency` 检查设定
-  - 如有问题，输出简要问题列表
-
-**7.2.6 阶段五：输出最终结果**
-- 输出给用户：
-  - 章节正文
-  - 创作说明（达成目标、关键情节、伏笔）
-  - 质量摘要：
-    - auto_check：通过/不通过
-    - plot_hole_detection：通过/不通过
-    - world_consistency：通过/不通过
-    - 字数统计
-- 呈现给用户确认
-- 保存到 `output/chapters/`
-
-#### 7.3 章节后续处理
-
-**每章完成后**：
-1. 呈现给用户确认
-2. 保存到 `output/chapters/`
-3. 字数统计（内部工具）
-4. 质量已达标：不需要后续审查
-
-每卷完成时：
-1. 调用 `version_control` 创建版本
-2. 生成卷完成报告
-
-### 阶段八：导出和交付
-1. 调用 `version_control` 创建最终版本
-2. 导出多种格式
-3. 生成项目总结
-
-## 通用规范
-
-所有Agent和Skill在其定义文件中都包含：
-- 输入输出规范
-- 质量检查标准
-- 工作流程说明
-- 注意事项
-
-## 输出文件结构
-
-```
-project/
-├── AGENTS.md                  # 系统架构文档
-├── README.md                  # 项目说明
-├── .opencode/
-│   ├── agents/                # Agent定义
-│   └── skills/                # Skill工具定义
-├── output/
-│   ├── style_guide.json       # 文风指南
-│   ├── chapters/              # 章节文件
-│   └── reports/               # 详细报告（用户要求时）
-├── outline/                   # 大纲文件
-│   ├── 第1卷_卷标题.md
-│   └── ...
-├── characters/                # 角色文件
-│   ├── 角色名1.md
-│   └── ...
-├── world_building/            # 世界观文件
-│   ├── world_overview.md
-│   └── ...
-├── versions/                  # 版本管理
-└── exports/                   # 导出文件
-```
-
-## 使用说明
-
-### 第一次使用
-从阶段一开始，逐步完成
-
-### 中断后继续
-所有内容保存在输出目录，进度自动追踪。可从任意阶段继续。
-
-### 获取帮助
-- 阅读各个Agent和Skill的定义文件
-- 参考示例和模板
-
-## v2.0优化亮点
-
-1. **架构精简**：Agent减少27%，Skill减少47%
-2. **防跑题机制**：骨架文+约束清单+实时自检，三层保障
-3. **自动化报告**：7个详细报告转为3个摘要，减少86%阅读量
-4. **聚焦核心**：只展示需要用户关注的关键问题
-5. **流程优化**：预分析从4个Skill减少到2个
-6. **用户友好**：每章只输出质量摘要，详细报告按需生成
-7. **质量保障**：创作时即确保质量，不需要事后审查
-
-## 防跑题机制详解
-
-### 三层保障
-
-**第一层：骨架文约束**
-- 明确列出每个部分应该写什么
-- 包含开场、发展、高潮、结尾的具体内容
-
-**第二层：约束清单（强制）**
-- 禁止写的内容：明确列出不能写的内容（超出大纲范围的内容）
-- 必须达成的事件：章节大纲中的关键点
-- 时间/地点/角色状态限制：确保一致性
-- 字数范围限制：控制篇幅
-
-**第三层：实时自检**
-- 每500字自动检查一次
-- 检查点：骨架文遵循度、约束清单遵循度、大纲范围
-- 如发现偏离，立即纠正
-
-### 违反约束的后果
-
-- 轻微偏离：continuation_agent自我纠正
-- 严重偏离：重新创作该部分
-- 完全不符合：重新创作整章
-
-## 质量检查机制详解
-
-### 每章检查（用户无感知）
-
-**自动检查（auto_check）**
-- 范围：对话自然度、节奏、情感、主题
-- 运行：后台自动运行
-- 输出：通过/不通过 + 3-5个要点
-- 用户看到：质量摘要中的一行
-
-**关键问题检查**
-- 范围：情节漏洞、世界观一致性
-- 运行：auto_check通过后运行
-- 输出：通过/不通过 + 3-5个要点
-- 用户看到：质量摘要中的一行
-
-### 每卷/全书检查（用户要求）
-
-**全面检查**
-- 范围：所有维度的详细检查
-- 运行：用户明确要求时
-- 输出：详细报告
-- 用户看到：完整的分析报告
-
-### 输出格式示例
-
-**每章输出**：
-```json
-{
-  "章节内容": "章节正文",
-  "创作说明": {...},
-  "质量摘要": {
-    "自动检查": {
-      "状态": "通过"
-    },
-    "情节漏洞": {
-      "状态": "通过"
-    },
-    "世界观一致性": {
-      "状态": "不通过",
-      "问题": [
-        "第3段提到荆杨使用手机，与设定不符"
-      ]
-    }
-  }
-}
-```
+---

@@ -1,3 +1,11 @@
+---
+name: character_gen
+description: 将角色设计信息格式化为标准化的角色卡文档
+metadata:
+  language: markdown
+  framework: novel-creation
+---
+
 # 角色卡格式化工具
 
 ## 功能

@@ -1,3 +1,11 @@
+---
+name: interactive_guide
+description: 根据当前阶段和已收集的信息，生成针对性的引导性问题，帮助用户完善需求
+metadata:
+  language: markdown
+  framework: novel-creation
+---
+
 # 交互式引导工具
 
 ## 功能
