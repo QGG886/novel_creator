@@ -275,12 +275,12 @@ mode: subagent
 ## 与其他Agent的配合
 
 ### 接收自
-- **quality_inspector_agent**：质量检查报告
+- **quality_inspector**：质量检查报告
 
 ### 输出到
-- **continuation_agent**：修复后的章节，继续创作
-- **golden_three_chapters_agent**：修复后的章节
-- **feedback_agent**：待处理问题清单
+- **continuation**：修复后的章节，继续创作
+- **golden_three_chapters**：修复后的章节
+- **feedback**：待处理问题清单
 
 ---
 

@@ -412,14 +412,3 @@ description: 一次性完成章节创作的所有预分析工作，整合上下�
 2. 上下文分析、伏笔安排、角色语音指导要相互协调
 3. 创作指导要具体、可操作
 4. 识别潜在风险要全面
-
----
-
-## 相关Skill
-
-- **chapter_outline**：使用chapter_prep输出生成骨架文
-- **chapter_write**：使用chapter_prep输出进行创作
-- **auto_check**：使用chapter_prep输出进行检查
-- **quality_agent**：使用chapter_prep输出进行质量评估
-
-

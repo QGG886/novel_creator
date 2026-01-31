@@ -267,7 +267,7 @@ mode: subagent
 | 输入信息缺失 | A | 请求用户提供完整信息 |
 | 骨架文未生成 | A | 先调用chapter_outline生成骨架文 |
 | 约束清单冲突 | B | 提供解决方案供用户选择 |
-| 质量检查不通过 | C | 调用quality_agent修复 |
+| 质量检查不通过 | C | 调用quality_fixer修复 |
 
 ---
 

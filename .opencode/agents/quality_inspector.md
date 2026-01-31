@@ -238,12 +238,12 @@ mode: subagent
 ## 与其他Agent的配合
 
 ### 输出到
-- **quality_fixer_agent**：提供质量报告，作为修复的依据
+- **quality_fixer**：提供质量报告，作为修复的依据
 
 ### 接收自
-- **golden_three_chapters_agent**：黄金三章创作完成后的检查
-- **continuation_agent**：续写章节完成后的检查
-- **feedback_agent**：用户反馈后的针对性检查
+- **golden_three_chapters**：黄金三章创作完成后的检查
+- **continuation**：续写章节完成后的检查
+- **feedback**：用户反馈后的针对性检查
 
 ---
 

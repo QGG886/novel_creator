@@ -745,14 +745,3 @@ description: 设计本章具体情节的展开，写出骨架文，并生成强�
 11. **约束清单要全面明确，确保能防跑题**
 12. **约束清单要合理平衡，既要防跑题又要留创作空间**
 13. **约束清单要可执行，便于创作时检查**
-
----
-
-## 相关Skill
-
-- **chapter_prep**：使用chapter_prep输出作为输入
-- **continuation_agent**：将骨架文和约束清单传递给continuation_agent
-- **auto_check**：在创作后使用auto_check检查质量
-- **world_consistency**：确保骨架文符合世界观设定
-
-
